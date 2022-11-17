@@ -1,3 +1,6 @@
+
+
+
 console.log('connected')
 
 const getAllBtn = document.querySelector('#all')
@@ -31,3 +34,35 @@ function createCharacterCard(char) {
 function clearCharacters() {
   charContainer.innerHTML = ``
 }
+
+const baseURL = `http://localhost:4000`
+
+
+function getAllChars(){
+  clearCharacters()
+  axios.get(`${baseURL}/characters`)
+  .then(function(res){
+    //returns a promise that we are calling res
+    //loop-over res and call the createChar on each element in the array
+
+    for(let i = 0; i< res.data.length; i++){
+      createCharacterCard(res.data[i])
+    }
+  })
+  .catch(error =>console.group(error))
+}
+
+getAllBtn.addEventListener('click',getAllChars)
+
+
+function getOneChar(){
+  clearCharacters()
+
+  console.log(event.target)
+  axios.get(`${baseURL}/character/`)
+
+}
+
+// for(let i=0; i < charBtns.length; i++){
+
+// }
